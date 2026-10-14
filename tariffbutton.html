@@ -1,0 +1,908 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TARIFF-O-TRON 2025</title>
+<style>
+  :root {
+    --steel-1: #c9ccd1;
+    --steel-2: #9aa0a8;
+    --steel-3: #5d636b;
+    --steel-4: #2e3238;
+    --red: #d3122f;
+    --red-dark: #8c0b1f;
+    --gold: #ffc934;
+    --screen: #0a1a14;
+    --screen-line: #1d3a2e;
+    --green: #39ff7a;
+    --crash: #ff3348;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse at 50% 0%, #3b4048 0%, #1b1e23 55%, #0d0f12 100%);
+    color: #eee;
+    font-family: "Arial Black", "Arial Bold", Impact, Helvetica, sans-serif;
+    overflow-x: hidden;
+    user-select: none;
+  }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 18px 16px 28px; }
+
+  /* ---------- TITLE ---------- */
+  header { text-align: center; position: relative; }
+  header::before {
+    content: ""; position: absolute; left: 50%; top: -10%; width: min(1100px, 95vw); height: 120%;
+    transform: translateX(-50%); pointer-events: none; z-index: 0;
+    background: radial-gradient(ellipse at center, rgba(255,201,52,.28) 0%, rgba(211,18,47,.14) 40%, transparent 70%);
+  }
+  header > * { position: relative; z-index: 1; }
+  .title {
+    margin: 0;
+    font-family: Impact, "Arial Black", "Haettenschweiler", sans-serif;
+    font-size: clamp(54px, 10.5vw, 150px);
+    line-height: .95;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: #f4f6f8;
+    background: linear-gradient(180deg, #ffffff 0%, #e9edf1 40%, #a9b1ba 52%, #f2f4f6 62%, #c9cfd6 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 3px #0b0c0e;
+    filter:
+      drop-shadow(0 2px 0 #8c0b1f)
+      drop-shadow(0 3px 0 #8c0b1f)
+      drop-shadow(0 4px 0 #5a0612)
+      drop-shadow(0 6px 4px rgba(0,0,0,.8))
+      drop-shadow(0 0 18px rgba(255,201,52,.55));
+    animation: titleGlow 2.4s ease-in-out infinite alternate;
+  }
+  @keyframes titleGlow {
+    to { filter:
+      drop-shadow(0 2px 0 #8c0b1f)
+      drop-shadow(0 3px 0 #8c0b1f)
+      drop-shadow(0 4px 0 #5a0612)
+      drop-shadow(0 6px 4px rgba(0,0,0,.8))
+      drop-shadow(0 0 32px rgba(255,201,52,.85)); }
+  }
+  .sub {
+    display: flex; justify-content: center; align-items: baseline; gap: .35em;
+    font-family: Impact, "Arial Black", sans-serif;
+    margin-top: 6px;
+  }
+  .year {
+    font-size: clamp(40px, 6.5vw, 92px);
+    color: var(--red);
+    -webkit-text-stroke: 2px #3d0410;
+    text-shadow: 4px 4px 0 #3d0410;
+    transform: rotate(-3deg);
+    display: inline-block;
+  }
+  .heist {
+    font-size: clamp(30px, 5vw, 70px);
+    letter-spacing: .12em;
+    color: transparent;
+    -webkit-text-stroke: 2px #d8dce1;
+    text-shadow: 3px 3px 0 rgba(0,0,0,.6);
+  }
+
+  /* ---------- MACHINE BODY ---------- */
+  .machine {
+    margin-top: 16px;
+    background:
+      repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0 2px, transparent 2px 7px),
+      linear-gradient(180deg, #b8bcc2 0%, #8e949c 45%, #6b7179 100%);
+    border: 6px solid #2a2d32;
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: inset 0 2px 0 rgba(255,255,255,.5), inset 0 -6px 0 rgba(0,0,0,.25), 0 20px 50px rgba(0,0,0,.7);
+    position: relative;
+  }
+  .rivet { position: absolute; width: 12px; height: 12px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #eee, #555 70%); box-shadow: 0 1px 2px #000; }
+
+  /* ---------- MONITORS ---------- */
+  .monitors { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .monitor {
+    background: linear-gradient(180deg, #4b5058, #2c3036);
+    border-radius: 14px;
+    padding: 10px 10px 12px;
+    border: 3px solid #1a1c20;
+    box-shadow: inset 0 2px 0 rgba(255,255,255,.25), 0 6px 0 #1a1c20;
+    position: relative;
+  }
+  .screen {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center, #0f2a1f 0%, var(--screen) 75%);
+    border: 2px solid #000;
+    box-shadow: inset 0 0 25px rgba(0,0,0,.9);
+    aspect-ratio: 4 / 3;
+  }
+  .screen::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,.22) 0 1px, transparent 1px 3px);
+    mix-blend-mode: multiply;
+  }
+  .screen canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .screen-label {
+    position: absolute; top: 6px; left: 8px; right: 8px; z-index: 2;
+    font-family: "Courier New", monospace; font-weight: bold;
+    color: #c8ffd9; font-size: clamp(11px, 1.25vw, 17px);
+    text-transform: uppercase; letter-spacing: .05em;
+    text-shadow: 0 0 6px rgba(57,255,122,.6);
+    display: flex; justify-content: space-between; gap: 6px;
+  }
+  .value {
+    position: absolute; bottom: 6px; left: 8px; right: 8px; z-index: 2;
+    font-family: "Courier New", monospace; font-weight: bold;
+    font-size: clamp(12px, 1.4vw, 20px);
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .delta { font-size: .8em; }
+  .loser .value, .loser .delta { color: #ff9aa5; text-shadow: 0 0 6px rgba(255,51,72,.7); }
+  .winner .value, .winner .delta { color: #9dffbf; text-shadow: 0 0 6px rgba(57,255,122,.7); }
+  .stamp {
+    position: absolute; z-index: 3; left: 50%; top: 52%;
+    transform: translate(-50%, -50%) rotate(-12deg) scale(2.2);
+    font-family: Impact, sans-serif; font-size: clamp(16px, 2.2vw, 30px);
+    padding: 2px 10px; border: 4px solid; border-radius: 6px;
+    opacity: 0; pointer-events: none; white-space: nowrap;
+  }
+  .loser .stamp { color: var(--crash); border-color: var(--crash); background: rgba(40,0,5,.6); }
+  .winner .stamp { color: var(--gold); border-color: var(--gold); background: rgba(40,30,0,.6); }
+  .stamp.show { animation: stamp .45s cubic-bezier(.2,1.6,.4,1) forwards; }
+  @keyframes stamp { to { opacity: 1; transform: translate(-50%, -50%) rotate(-12deg) scale(1); } }
+  .monitor.alarm .screen { animation: alarm .35s steps(2) 6; }
+  @keyframes alarm { 50% { box-shadow: inset 0 0 60px rgba(255,30,50,.9); } }
+  .monitor.boom .screen { animation: boom .35s steps(2) 6; }
+  @keyframes boom { 50% { box-shadow: inset 0 0 60px rgba(255,210,50,.9); } }
+  .monitor-led { position: absolute; right: 14px; bottom: -1px; width: 8px; height: 8px; border-radius: 50%;
+    background: #3f0; box-shadow: 0 0 6px #3f0; }
+
+  /* ---------- CONTROL DECK ---------- */
+  .deck {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: minmax(0,1fr) minmax(420px, 1.45fr) minmax(0,1fr);
+    gap: 16px;
+    align-items: stretch;
+  }
+  .panel {
+    background: linear-gradient(180deg, #d9dce0, #a7acb3);
+    border: 3px solid #2a2d32; border-radius: 12px;
+    padding: 12px;
+    box-shadow: inset 0 2px 0 #fff, 0 5px 0 #2a2d32;
+    color: #222; min-width: 0;
+  }
+  .panel h3 {
+    margin: 0 0 8px; font-size: 13px; letter-spacing: .12em; text-align: center;
+    background: #222; color: #e8e8e8; padding: 4px 6px; border-radius: 4px;
+  }
+
+  /* needle gauges */
+  .gauges { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .gauge { text-align: center; }
+  .gauge-face {
+    position: relative; width: 100%; aspect-ratio: 2 / 1.25; overflow: hidden;
+    background: #f4efe0; border: 2px solid #333; border-radius: 6px 6px 3px 3px;
+    box-shadow: inset 0 0 8px rgba(0,0,0,.35);
+  }
+  .gauge-face::before {
+    content: ""; position: absolute; left: 10%; right: 10%; top: 18%; height: 160%;
+    border-radius: 50%;
+    border: 5px solid transparent;
+    border-top-color: #2a9d48; border-right-color: var(--red);
+    transform: rotate(-45deg);
+  }
+  .needle {
+    position: absolute; left: 50%; bottom: 6%; width: 2px; height: 78%;
+    background: #111; transform-origin: 50% 100%; transform: rotate(-50deg);
+    transition: transform .18s ease-out;
+  }
+  .needle::after { content: ""; position: absolute; bottom: -4px; left: -4px; width: 10px; height: 10px; border-radius: 50%; background: #111; }
+  .gauge span { font-size: 10px; letter-spacing: .05em; display: block; margin-top: 3px; }
+
+  .buttons { display: flex; justify-content: space-around; margin-top: 12px; }
+  .btn-red {
+    width: 34px; height: 34px; border-radius: 50%; border: 3px solid #333;
+    background: radial-gradient(circle at 35% 30%, #ff7d8c, var(--red) 55%, var(--red-dark));
+    box-shadow: 0 4px 0 #333; cursor: pointer;
+  }
+  .btn-red:active { transform: translateY(3px); box-shadow: 0 1px 0 #333; }
+  .btn-red.lit { box-shadow: 0 4px 0 #333, 0 0 16px 4px rgba(255,40,60,.9); }
+  .tags { display: flex; justify-content: space-around; margin-top: 8px; }
+  .tag { background: #f3f0e6; border: 1px solid #555; font-size: 9px; padding: 2px 4px; color: #222; }
+
+  /* ---------- SLOT MACHINE ---------- */
+  .slot-zone { display: flex; align-items: center; justify-content: center; gap: 0; position: relative; }
+  .cabinet {
+    position: relative; flex: 1;
+    background: linear-gradient(180deg, var(--red) 0%, var(--red-dark) 100%);
+    border: 4px solid #2a0108; border-radius: 22px 22px 14px 14px;
+    padding: 14px 16px 16px;
+    box-shadow: inset 0 3px 0 rgba(255,255,255,.35), 0 8px 0 #2a0108, 0 0 40px rgba(255,201,52,.25);
+  }
+  .bulbs { position: absolute; inset: 5px; pointer-events: none; border-radius: 18px; }
+  .bulb { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: #6b4a00;
+    transform: translate(-50%, -50%); transition: background .08s, box-shadow .08s; }
+  .bulb.on { background: #fff6bf; box-shadow: 0 0 8px 3px var(--gold); }
+  .marquee {
+    text-align: center; font-family: Impact, sans-serif; color: var(--gold);
+    font-size: clamp(20px, 2.4vw, 32px); letter-spacing: .08em;
+    text-shadow: 0 0 10px rgba(255,201,52,.8), 2px 2px 0 #4a0010;
+    margin: 4px 0 10px;
+  }
+  .reels-frame {
+    background: #111; border: 4px solid var(--gold); border-radius: 10px; padding: 8px;
+    box-shadow: inset 0 0 18px #000, 0 0 14px rgba(255,201,52,.5);
+    position: relative;
+  }
+  .reels { display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 8px; }
+  .reel-col { text-align: center; }
+  .reel-head { font-size: 10px; letter-spacing: .15em; color: var(--gold); margin-bottom: 4px; }
+  .reel {
+    --h: 64px;
+    height: calc(var(--h) * 3); overflow: hidden; position: relative;
+    background: linear-gradient(180deg, #8a8a8a 0%, #fff 22%, #fff 78%, #8a8a8a 100%);
+    border-radius: 6px; border: 2px solid #000;
+  }
+  .strip { position: absolute; left: 0; right: 0; top: 0; will-change: transform; }
+  .cell {
+    height: var(--h); display: flex; align-items: center; justify-content: center;
+    font-family: Impact, "Arial Black", sans-serif; color: #1a1a1a;
+    font-size: 26px; border-bottom: 1px dashed rgba(0,0,0,.12);
+    white-space: nowrap; overflow: hidden;
+  }
+  .cell.small { font-size: 20px; }
+  .cell.emoji { font-size: 38px; }
+  .cell.rate { color: var(--red); font-size: 32px; }
+  .reel.blur .strip { filter: blur(1.5px); }
+  .payline {
+    position: absolute; left: 4px; right: 4px; top: calc(50% + 7px); height: 64px; transform: translateY(-50%);
+    border-top: 3px solid rgba(211,18,47,.85); border-bottom: 3px solid rgba(211,18,47,.85);
+    pointer-events: none;
+  }
+  .result {
+    margin-top: 10px; min-height: 2.6em;
+    background: #050505; border: 2px solid #444; border-radius: 6px;
+    font-family: "Courier New", monospace; font-weight: bold;
+    color: #ffb000; text-shadow: 0 0 6px rgba(255,176,0,.8);
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    font-size: clamp(13px, 1.4vw, 18px); padding: 4px 8px;
+  }
+
+  /* lever */
+  .lever-housing {
+    position: relative; width: 74px; height: 280px; margin-left: -6px; flex: none;
+    cursor: grab; touch-action: none;
+  }
+  .lever-housing.disabled { cursor: not-allowed; }
+  .lever-housing:focus { outline: none; }
+  .lever-base {
+    position: absolute; left: 6px; top: 150px; width: 44px; height: 92px;
+    background: linear-gradient(90deg, #4c5158, #c6cad0 45%, #5b6067);
+    border: 3px solid #1a1c20; border-radius: 0 14px 14px 0;
+  }
+  .lever-slot { position: absolute; left: 22px; top: 164px; width: 10px; height: 64px; background: #0b0c0e; border-radius: 6px; }
+  .lever-arm {
+    position: absolute; left: 22px; top: 40px; width: 10px; height: 156px;
+    transform-origin: 50% 100%;
+    background: linear-gradient(90deg, #6d727a, #f2f3f5 50%, #6d727a);
+    border-radius: 5px; border: 1px solid #222;
+  }
+  .lever-knob {
+    position: absolute; left: 50%; top: -34px; width: 50px; height: 50px; transform: translateX(-50%);
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #ff9aa5, var(--red) 50%, #5a0612 100%);
+    border: 2px solid #2a0108;
+    box-shadow: 0 4px 10px rgba(0,0,0,.6);
+  }
+  .pull-hint {
+    position: absolute; left: 50%; top: -24px; transform: translateX(-50%);
+    font-size: 11px; color: var(--gold); letter-spacing: .1em; white-space: nowrap;
+    animation: hint 1s ease-in-out infinite alternate;
+    text-shadow: 0 0 6px rgba(255,201,52,.8);
+  }
+  @keyframes hint { from { opacity: .3; } to { opacity: 1; } }
+  .lever-housing.disabled .pull-hint { visibility: hidden; }
+
+  /* right panel: revenue */
+  .counter {
+    background: #050505; border: 2px solid #333; border-radius: 6px; padding: 8px;
+    font-family: "Courier New", monospace; font-weight: bold; color: var(--green);
+    text-shadow: 0 0 8px rgba(57,255,122,.7); text-align: right; font-size: clamp(16px, 1.8vw, 24px);
+    margin-bottom: 8px; overflow: hidden; white-space: nowrap;
+  }
+  .counter.red { color: var(--crash); text-shadow: 0 0 8px rgba(255,51,72,.7); }
+  .counter small { display: block; font-size: 10px; color: #bbb; text-shadow: none; text-align: left; letter-spacing: .08em; }
+  .ticker {
+    background: #111; color: var(--gold); border: 2px solid #333; border-radius: 4px; overflow: hidden;
+    font-family: "Courier New", monospace; font-weight: bold; font-size: 13px; padding: 4px 0; white-space: nowrap;
+  }
+  .ticker-inner { display: inline-block; padding-left: 100%; animation: tick 28s linear infinite; }
+  @keyframes tick { to { transform: translateX(-100%); } }
+
+  .footer-bar {
+    margin-top: 14px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+    font-family: "Courier New", monospace; font-size: 12px; color: #2a2d32; font-weight: bold;
+  }
+  .footer-bar button {
+    font-family: inherit; font-weight: bold; font-size: 12px; cursor: pointer;
+    background: #2a2d32; color: #eee; border: 0; border-radius: 4px; padding: 6px 10px;
+  }
+  .footer-bar button:hover { background: #444; }
+
+  /* ---------- JACKPOT OVERLAY ---------- */
+  .jackpot {
+    position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column;
+    pointer-events: none; z-index: 50; opacity: 0;
+  }
+  .jackpot.show { animation: jp 3.4s ease forwards; }
+  @keyframes jp { 0% { opacity: 0; transform: scale(.3); } 12% { opacity: 1; transform: scale(1.1); }
+    20% { transform: scale(1); } 80% { opacity: 1; } 100% { opacity: 0; } }
+  .jackpot .big {
+    font-family: Impact, sans-serif; font-size: clamp(60px, 13vw, 190px); color: var(--gold);
+    -webkit-text-stroke: 3px #5a2a00; text-shadow: 0 0 40px rgba(255,201,52,.9), 8px 8px 0 #5a0612;
+    animation: wobble .25s ease-in-out infinite alternate; line-height: 1;
+  }
+  .jackpot .small {
+    font-family: Impact, sans-serif; font-size: clamp(22px, 3.4vw, 48px); color: #fff;
+    text-shadow: 0 0 12px #000, 3px 3px 0 var(--red); margin-top: 8px; text-align: center; padding: 0 16px;
+  }
+  @keyframes wobble { from { transform: rotate(-3deg); } to { transform: rotate(3deg); } }
+  .coin { position: fixed; top: -60px; z-index: 40; pointer-events: none; font-size: 34px; will-change: transform; }
+  .flash { position: fixed; inset: 0; background: #fff; opacity: 0; pointer-events: none; z-index: 45; }
+  .flash.go { animation: flash .5s ease-out; }
+  @keyframes flash { 0% { opacity: .75; } 100% { opacity: 0; } }
+  .shake { animation: shake .5s linear; }
+  @keyframes shake {
+    10%, 90% { transform: translate(-2px, 1px); } 20%, 80% { transform: translate(4px, -2px); }
+    30%, 50%, 70% { transform: translate(-6px, 2px); } 40%, 60% { transform: translate(6px, -1px); }
+  }
+
+  @media (max-width: 1050px) {
+    .deck { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
+    .slot-zone { grid-column: 1 / -1; order: -1; }
+  }
+  @media (max-width: 760px) {
+    .monitors { grid-template-columns: repeat(2, 1fr); }
+    .deck { grid-template-columns: minmax(0,1fr); }
+    .slot-zone { grid-column: auto; }
+    .lever-housing { transform: scale(.85); margin-left: -12px; }
+    .reel { --h: 52px; }
+    .payline { height: 52px; }
+    .cell { font-size: 18px; } .cell.rate { font-size: 22px; } .cell.emoji { font-size: 28px; } .cell.small { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header>
+    <h1 class="title">TARIFF-O-TRON</h1>
+    <div class="sub"><span class="year">2025</span><span class="heist">HEISTOMATIC</span></div>
+  </header>
+
+  <section class="machine" id="machine">
+    <i class="rivet" style="left:8px;top:8px"></i><i class="rivet" style="right:8px;top:8px"></i>
+    <i class="rivet" style="left:8px;bottom:8px"></i><i class="rivet" style="right:8px;bottom:8px"></i>
+
+    <div class="monitors" id="monitors"></div>
+
+    <div class="deck">
+      <!-- LEFT: needle bank -->
+      <div class="panel">
+        <h3>ECONOMIC VITAL SIGNS</h3>
+        <div class="gauges" id="gauges"></div>
+        <div class="buttons">
+          <div class="btn-red" title="Do not press"></div>
+          <div class="btn-red" title="Definitely do not press"></div>
+          <div class="btn-red" title="Pause tariffs (90 days)"></div>
+        </div>
+        <div class="tags"><span class="tag">PANIC</span><span class="tag">PAUSE</span><span class="tag">UN-PAUSE</span></div>
+      </div>
+
+      <!-- MIDDLE: slot machine + lever -->
+      <div class="slot-zone">
+        <div class="cabinet" id="cabinet">
+          <div class="bulbs" id="bulbs"></div>
+          <div class="marquee">★ PULL TO TARIFF ★</div>
+          <div class="reels-frame">
+            <div class="reels">
+              <div class="reel-col"><div class="reel-head">TARGET</div><div class="reel" id="reel0"><div class="strip"></div></div></div>
+              <div class="reel-col"><div class="reel-head">TARIFF</div><div class="reel" id="reel1"><div class="strip"></div></div></div>
+              <div class="reel-col"><div class="reel-head">PAYOUT</div><div class="reel" id="reel2"><div class="strip"></div></div></div>
+            </div>
+            <div class="payline"></div>
+          </div>
+          <div class="result" id="result">INSERT AMERICAN SAVINGS · PULL LEVER</div>
+        </div>
+        <div class="lever-housing" id="lever" role="button" aria-label="Pull the lever" tabindex="0">
+          <div class="lever-base"></div>
+          <div class="lever-slot"></div>
+          <div class="lever-arm" id="leverArm"><div class="lever-knob"></div></div>
+          <div class="pull-hint">PULL ▼</div>
+        </div>
+      </div>
+
+      <!-- RIGHT: counters -->
+      <div class="panel">
+        <h3>HEIST TELEMETRY</h3>
+        <div class="counter" id="revenue"><small>TARIFF REVENUE (CLAIMED)</small>$0</div>
+        <div class="counter red" id="wiped"><small>MARKET VALUE WIPED OUT</small>$0</div>
+        <div class="counter" id="pulls"><small>LEVER PULLS</small>0</div>
+        <div class="ticker"><span class="ticker-inner" id="tickerText"></span></div>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <span>SPACE / CLICK LEVER = PULL &nbsp;·&nbsp; R = RESET &nbsp;·&nbsp; M = SOUND</span>
+      <span>
+        <button id="soundBtn">🔊 SOUND ON</button>
+        <button id="resetBtn">↺ RESET ECONOMY</button>
+      </span>
+    </div>
+  </section>
+</div>
+
+<div class="flash" id="flash"></div>
+<div class="jackpot" id="jackpot"><div class="big">JACKPOT!</div><div class="small" id="jackpotSub">BUDDIES' BILLIONS ↑↑↑</div></div>
+
+<script>
+(() => {
+  "use strict";
+
+  // ---------------- CONFIG ----------------
+  const SCREENS = [
+    { key: "stooge",  name: "Stooge Stash",      base: 48200,  kind: "loser",  stamp: "WIPED OUT" },
+    { key: "suckers", name: "Suckers' Saving",   base: 12750,  kind: "loser",  stamp: "CRASHED" },
+    { key: "dummies", name: "Dummies' Dosh",     base: 3410,   kind: "loser",  stamp: "GONE" },
+    { key: "buddies", name: "Buddies' Billions", base: 412e9,  kind: "winner", stamp: "KA-CHING!" },
+  ];
+  const TARGETS = ["CHINA", "CANADA", "MEXICO", "THE EU", "PENGUINS", "JAPAN", "VIETNAM", "INDIA", "LESOTHO", "EVERYONE"];
+  const RATES   = ["10%", "25%", "34%", "46%", "54%", "104%", "125%", "145%", "245%"];
+  const PAYOUTS = ["💰", "💵", "🏌️", "📉", "🦅", "💸", "🛢️", "🎰"];
+  const GAUGE_NAMES = ["STOCKS", "PANIC", "PRICES", "401(K)", "GREED", "EGO"];
+  const TICKER = [
+    "BREAKING: TARIFFS ARE A TAX ON FOREIGNERS (SOURCE: TRUST ME)",
+    "PENGUIN ISLAND RETALIATES WITH FISH EMBARGO",
+    "DOW DOWN · S&P DOWN · NASDAQ DOWN · GOLF MEMBERSHIPS UP",
+    "\"THE NAME'S BOND... U.S. TREASURY BOND!!\"",
+    "EGG PRICES ACHIEVE ORBIT",
+    "ECONOMISTS: \"PLEASE STOP PULLING THE LEVER\"",
+    "LIBERATION DAY SALE: EVERYTHING COSTS MORE",
+  ];
+
+  // ---------------- STATE ----------------
+  const POINTS = 70;
+  const state = {
+    spinning: false,
+    pulls: 0,
+    revenue: 0,
+    wiped: 0,
+    sound: true,
+    series: {},
+  };
+
+  // ---------------- AUDIO (synthesized, offline) ----------------
+  let ctx = null;
+  function audio() {
+    if (!state.sound) return null;
+    if (!ctx) { try { ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return null; } }
+    if (ctx.state === "suspended") ctx.resume();
+    return ctx;
+  }
+  function tone(freq, dur, type = "square", vol = .12, when = 0, slideTo = null) {
+    const a = audio(); if (!a) return;
+    const t = a.currentTime + when;
+    const o = a.createOscillator(), g = a.createGain();
+    o.type = type; o.frequency.setValueAtTime(freq, t);
+    if (slideTo) o.frequency.exponentialRampToValueAtTime(slideTo, t + dur);
+    g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+    o.connect(g).connect(a.destination); o.start(t); o.stop(t + dur + .02);
+  }
+  function noise(dur, vol = .2, when = 0) {
+    const a = audio(); if (!a) return;
+    const len = Math.floor(a.sampleRate * dur);
+    const buf = a.createBuffer(1, len, a.sampleRate), d = buf.getChannelData(0);
+    for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / len);
+    const s = a.createBufferSource(), g = a.createGain(), f = a.createBiquadFilter();
+    f.type = "lowpass"; f.frequency.value = 900;
+    s.buffer = buf; g.gain.value = vol;
+    s.connect(f).connect(g).connect(a.destination); s.start(a.currentTime + when);
+  }
+  const sfx = {
+    clunk() { noise(.18, .5); tone(90, .25, "sine", .4, 0, 40); },
+    tick()  { tone(1400 + Math.random() * 300, .03, "square", .04); },
+    stop()  { tone(220, .12, "square", .12); noise(.08, .25); },
+    win()   { [523, 659, 784, 1047, 784, 1047, 1319].forEach((f, i) => tone(f, .16, "square", .1, i * .09)); },
+    crash() { tone(400, 1.1, "sawtooth", .09, .05, 60); tone(300, 1.1, "sawtooth", .07, .1, 45); },
+    coin()  { tone(1800, .05, "square", .05); tone(2400, .08, "square", .05, .05); },
+  };
+
+  // ---------------- MONITORS ----------------
+  const monitorsEl = document.getElementById("monitors");
+  const mon = {};
+  SCREENS.forEach(s => {
+    const el = document.createElement("div");
+    el.className = "monitor " + s.kind;
+    el.innerHTML = `
+      <div class="screen">
+        <canvas></canvas>
+        <div class="screen-label"><span>${s.name}</span><span class="delta"></span></div>
+        <div class="value"><span class="amt"></span></div>
+        <div class="stamp">${s.stamp}</div>
+      </div>
+      <div class="monitor-led"></div>`;
+    monitorsEl.appendChild(el);
+    mon[s.key] = {
+      el, cfg: s,
+      canvas: el.querySelector("canvas"),
+      amt: el.querySelector(".amt"),
+      delta: el.querySelector(".delta"),
+      stamp: el.querySelector(".stamp"),
+    };
+  });
+
+  function seedSeries() {
+    SCREENS.forEach(s => {
+      const arr = [];
+      let v = s.kind === "winner" ? 92 : 96;
+      for (let i = 0; i < POINTS; i++) {
+        v += (Math.random() - .45) * 1.6;
+        arr.push(v);
+      }
+      // normalize so the last value reads 100
+      const k = 100 / arr[arr.length - 1];
+      state.series[s.key] = arr.map(x => x * k);
+    });
+  }
+
+  function money(n) {
+    const abs = Math.abs(n);
+    if (abs >= 1e12) return "$" + (n / 1e12).toFixed(2) + "T";
+    if (abs >= 1e9)  return "$" + (n / 1e9).toFixed(1) + "B";
+    if (abs >= 1e6)  return "$" + (n / 1e6).toFixed(1) + "M";
+    return "$" + Math.round(n).toLocaleString("en-US");
+  }
+
+  function drawMonitor(key) {
+    const m = mon[key], data = state.series[key], c = m.canvas;
+    const dpr = window.devicePixelRatio || 1;
+    const w = c.clientWidth, h = c.clientHeight;
+    if (!w || !h) return;
+    if (c.width !== Math.round(w * dpr) || c.height !== Math.round(h * dpr)) {
+      c.width = Math.round(w * dpr); c.height = Math.round(h * dpr);
+    }
+    const g = c.getContext("2d");
+    g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    g.clearRect(0, 0, w, h);
+
+    const top = h * .2, bottom = h * .84, left = 6, right = w - 6;
+    // grid
+    g.strokeStyle = "rgba(57,255,122,.13)"; g.lineWidth = 1;
+    for (let i = 0; i <= 4; i++) { const y = top + (bottom - top) * i / 4; g.beginPath(); g.moveTo(left, y); g.lineTo(right, y); g.stroke(); }
+    for (let i = 0; i <= 6; i++) { const x = left + (right - left) * i / 6; g.beginPath(); g.moveTo(x, top); g.lineTo(x, bottom); g.stroke(); }
+
+    const max = Math.max(110, ...data) * 1.05, min = 0;
+    const xs = i => left + (right - left) * i / (data.length - 1);
+    const ys = v => bottom - (bottom - top) * (v - min) / (max - min);
+    const isWin = m.cfg.kind === "winner";
+    const col = isWin ? "#39ff7a" : "#ff3348";
+
+    // fill
+    const grad = g.createLinearGradient(0, top, 0, bottom);
+    grad.addColorStop(0, isWin ? "rgba(57,255,122,.35)" : "rgba(255,51,72,.35)");
+    grad.addColorStop(1, "rgba(0,0,0,0)");
+    g.beginPath(); g.moveTo(xs(0), bottom);
+    data.forEach((v, i) => g.lineTo(xs(i), ys(v)));
+    g.lineTo(xs(data.length - 1), bottom); g.closePath();
+    g.fillStyle = grad; g.fill();
+
+    // line
+    g.beginPath();
+    data.forEach((v, i) => i ? g.lineTo(xs(i), ys(v)) : g.moveTo(xs(i), ys(v)));
+    g.strokeStyle = col; g.lineWidth = 2.5; g.shadowColor = col; g.shadowBlur = 8; g.stroke();
+    g.shadowBlur = 0;
+
+    // head dot + arrow
+    const lx = xs(data.length - 1), ly = ys(data[data.length - 1]);
+    g.fillStyle = col; g.beginPath(); g.arc(lx, ly, 4, 0, Math.PI * 2); g.fill();
+
+    const v = data[data.length - 1];
+    m.amt.textContent = money(m.cfg.base * v / 100);
+    const pct = v - 100;
+    m.delta.textContent = (pct >= 0 ? "▲ +" : "▼ ") + pct.toFixed(1) + "%";
+  }
+  const drawAll = () => SCREENS.forEach(s => drawMonitor(s.key));
+
+  // idle jitter keeps the screens alive
+  setInterval(() => {
+    if (state.spinning) return;
+    SCREENS.forEach(s => {
+      const arr = state.series[s.key];
+      const last = arr[arr.length - 1];
+      const drift = s.kind === "winner" ? .15 : -.05;
+      arr.push(Math.max(.5, last * (1 + (Math.random() - .5) * .012 + drift / 100)));
+      arr.shift();
+    });
+    drawAll();
+  }, 450);
+
+  // ---------------- GAUGES ----------------
+  const gaugesEl = document.getElementById("gauges");
+  const needles = GAUGE_NAMES.map(n => {
+    const d = document.createElement("div");
+    d.className = "gauge";
+    d.innerHTML = `<div class="gauge-face"><div class="needle"></div></div><span>${n}</span>`;
+    gaugesEl.appendChild(d);
+    return d.querySelector(".needle");
+  });
+  let gaugeMode = "idle";
+  setInterval(() => {
+    needles.forEach((n, i) => {
+      let a;
+      if (gaugeMode === "spin") a = -60 + Math.random() * 120;
+      else if (gaugeMode === "redline") a = (i === 0 || i === 3 ? -62 : 52) + Math.random() * 8;
+      else a = -25 + Math.sin(Date.now() / 900 + i) * 12 + Math.random() * 4;
+      n.style.transform = `rotate(${a}deg)`;
+    });
+  }, 140);
+
+  // ---------------- BULBS ----------------
+  const bulbsEl = document.getElementById("bulbs");
+  const bulbs = [];
+  function layoutBulbs() {
+    bulbsEl.innerHTML = ""; bulbs.length = 0;
+    const r = bulbsEl.getBoundingClientRect();
+    const spacing = 24;
+    const nx = Math.max(2, Math.round(r.width / spacing)), ny = Math.max(2, Math.round(r.height / spacing));
+    const pts = [];
+    for (let i = 0; i < nx; i++) pts.push([i / nx * 100, 0]);
+    for (let i = 0; i < ny; i++) pts.push([100, i / ny * 100]);
+    for (let i = nx; i > 0; i--) pts.push([i / nx * 100, 100]);
+    for (let i = ny; i > 0; i--) pts.push([0, i / ny * 100]);
+    pts.forEach(([x, y]) => {
+      const b = document.createElement("i"); b.className = "bulb";
+      b.style.left = x + "%"; b.style.top = y + "%";
+      bulbsEl.appendChild(b); bulbs.push(b);
+    });
+  }
+  let bulbStep = 0, bulbMode = "idle";
+  setInterval(() => {
+    bulbStep++;
+    bulbs.forEach((b, i) => {
+      let on;
+      if (bulbMode === "spin") on = (i + bulbStep) % 3 === 0;
+      else if (bulbMode === "win") on = bulbStep % 2 === 0;
+      else on = (i + Math.floor(bulbStep / 3)) % 6 === 0;
+      b.classList.toggle("on", on);
+    });
+  }, 90);
+
+  // ---------------- REELS ----------------
+  const REPEAT = 14;
+  const reels = [
+    { el: document.getElementById("reel0"), items: TARGETS, cls: "small" },
+    { el: document.getElementById("reel1"), items: RATES,   cls: "rate" },
+    { el: document.getElementById("reel2"), items: PAYOUTS, cls: "emoji" },
+  ].map(r => {
+    const strip = r.el.querySelector(".strip");
+    for (let k = 0; k < REPEAT; k++) r.items.forEach(t => {
+      const c = document.createElement("div"); c.className = "cell " + r.cls; c.textContent = t; strip.appendChild(c);
+    });
+    return { ...r, strip, index: 1 };
+  });
+  const cellH = r => r.strip.firstElementChild.getBoundingClientRect().height;
+  function placeReel(r, idx, animate, ms) {
+    const h = cellH(r);
+    r.strip.style.transition = animate ? `transform ${ms}ms cubic-bezier(.12,.6,.25,1.04)` : "none";
+    r.strip.style.transform = `translateY(${-(idx - 1) * h}px)`; // idx is shown on the middle row
+    r.index = idx;
+  }
+  function initReels() { reels.forEach((r, i) => placeReel(r, r.items.length + (i * 3) % r.items.length, false)); }
+
+  function spinReel(r, targetItem, ms) {
+    const n = r.items.length;
+    // jump back to an equivalent position in the first repeats without animation
+    const cur = r.index % n + n;
+    placeReel(r, cur, false);
+    void r.strip.offsetHeight;
+    const target = n * (REPEAT - 2) + targetItem;
+    r.el.classList.add("blur");
+    placeReel(r, target, true, ms);
+    return new Promise(res => setTimeout(() => { r.el.classList.remove("blur"); sfx.stop(); res(); }, ms));
+  }
+
+  // ---------------- LEVER ----------------
+  const lever = document.getElementById("lever");
+  const arm = document.getElementById("leverArm");
+  let drag = null;
+  function setArm(deg, ms = 0) {
+    arm.style.transition = ms ? `transform ${ms}ms cubic-bezier(.3,1.5,.5,1)` : "none";
+    arm.style.transform = `scaleY(${Math.cos(deg * Math.PI / 180)})`;
+  }
+  // The arm "pulls down" by flattening toward the slot (scaleY), reads well head-on.
+  function leverPullAnim() {
+    arm.style.transition = "transform 160ms ease-in";
+    arm.style.transform = "scaleY(-0.25)";
+    setTimeout(() => setArm(0, 700), 260);
+  }
+  lever.addEventListener("pointerdown", e => {
+    if (state.spinning) return;
+    drag = { y: e.clientY };
+    lever.setPointerCapture(e.pointerId);
+    lever.style.cursor = "grabbing";
+  });
+  lever.addEventListener("pointermove", e => {
+    if (!drag) return;
+    const dy = Math.max(0, e.clientY - drag.y);
+    const s = Math.max(-0.25, 1 - dy / 90);
+    arm.style.transition = "none";
+    arm.style.transform = `scaleY(${s})`;
+    if (dy > 110) { drag = null; pull(true); }
+  });
+  const endDrag = () => {
+    if (!drag) return;
+    drag = null; lever.style.cursor = "";
+    pull(); // a simple click (or short drag) also pulls
+  };
+  lever.addEventListener("pointerup", endDrag);
+  lever.addEventListener("pointercancel", () => { drag = null; setArm(0, 400); });
+  lever.addEventListener("keydown", e => { if (e.key === "Enter") pull(); });
+
+  // ---------------- PULL ----------------
+  const resultEl = document.getElementById("result");
+  const machine = document.getElementById("machine");
+  const pick = a => Math.floor(Math.random() * a.length);
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  async function pull(alreadyDown) {
+    if (state.spinning) return;
+    state.spinning = true;
+    lever.classList.add("disabled");
+    state.pulls++;
+    if (alreadyDown) { setTimeout(() => setArm(0, 700), 120); } else leverPullAnim();
+    sfx.clunk();
+    machine.classList.remove("shake"); void machine.offsetWidth; machine.classList.add("shake");
+
+    SCREENS.forEach(s => { mon[s.key].stamp.classList.remove("show"); mon[s.key].el.classList.remove("alarm", "boom"); });
+    resultEl.textContent = "CALCULATING RECIPROCAL MATH...";
+    bulbMode = "spin"; gaugeMode = "spin";
+    document.querySelectorAll(".btn-red").forEach(b => b.classList.add("lit"));
+
+    const tickTimer = setInterval(sfx.tick, 70);
+
+    const t = [pick(TARGETS), pick(RATES), pick(PAYOUTS)];
+    // later pulls skew to bigger tariffs
+    if (state.pulls > 1 && Math.random() < .6) t[1] = Math.min(RATES.length - 1, RATES.length - 4 + pick([0, 1, 2, 3]));
+
+    await Promise.all([
+      spinReel(reels[0], t[0], 1500),
+      spinReel(reels[1], t[1], 2200),
+      spinReel(reels[2], t[2], 2900),
+    ]);
+    clearInterval(tickTimer);
+
+    const target = TARGETS[t[0]], rate = RATES[t[1]], rateNum = parseInt(rate, 10);
+    resultEl.textContent = `${rate} TARIFF ON ${target}! ${PAYOUTS[t[2]]}  SAVINGS → BUDDIES`;
+
+    await crashAndBoom(rateNum);
+
+    bulbMode = "idle"; gaugeMode = "redline";
+    document.querySelectorAll(".btn-red").forEach(b => b.classList.remove("lit"));
+    state.spinning = false;
+    lever.classList.remove("disabled");
+  }
+
+  async function crashAndBoom(rateNum) {
+    const severity = .35 + Math.min(rateNum, 245) / 245 * .45; // 0.35 .. 0.8
+    const steps = 34;
+    const start = {}; SCREENS.forEach(s => start[s.key] = state.series[s.key][POINTS - 1]);
+
+    // flash + jackpot overlay + coins
+    const flash = document.getElementById("flash");
+    flash.classList.remove("go"); void flash.offsetWidth; flash.classList.add("go");
+    const jp = document.getElementById("jackpot");
+    document.getElementById("jackpotSub").textContent =
+      ["BUDDIES' BILLIONS ↑↑↑", "THE HOUSE ALWAYS WINS", "YOUR 401(K) IS NOW THEIR YACHT", "WINNING SO MUCH!"][Math.min(state.pulls - 1, 3)];
+    jp.classList.remove("show"); void jp.offsetWidth; jp.classList.add("show");
+    bulbMode = "win"; gaugeMode = "redline";
+    sfx.win(); sfx.crash();
+    coinRain(40);
+
+    SCREENS.forEach(s => mon[s.key].el.classList.add(s.kind === "winner" ? "boom" : "alarm"));
+
+    const wipedPerScreen = { stooge: 6.1e12, suckers: 3.8e12, dummies: 1.4e12 };
+    for (let i = 1; i <= steps; i++) {
+      SCREENS.forEach(s => {
+        const arr = state.series[s.key];
+        const last = arr[arr.length - 1];
+        let next;
+        if (s.kind === "winner") {
+          const goal = start[s.key] * (1 + severity * 1.6);
+          next = last + (goal - start[s.key]) / steps * (0.6 + Math.random() * 0.9);
+        } else {
+          const goal = start[s.key] * (1 - severity);
+          next = last + (goal - start[s.key]) / steps * (0.5 + Math.random() * 1.1);
+          if (Math.random() < .15) next += start[s.key] * .04; // dead-cat bounce
+          next = Math.max(.4, next);
+        }
+        arr.push(next); arr.shift();
+      });
+      state.revenue += 3.1e9 * severity * (0.5 + Math.random());
+      state.wiped += (wipedPerScreen.stooge + wipedPerScreen.suckers + wipedPerScreen.dummies) * severity / steps * (0.6 + Math.random() * .8) / 3;
+      updateCounters();
+      drawAll();
+      await sleep(55);
+    }
+    SCREENS.forEach(s => mon[s.key].stamp.classList.add("show"));
+  }
+
+  function coinRain(n) {
+    const icons = ["💰", "💵", "🪙", "💸"];
+    for (let i = 0; i < n; i++) {
+      setTimeout(() => {
+        const c = document.createElement("div");
+        c.className = "coin"; c.textContent = icons[pick(icons)];
+        c.style.left = (Math.random() * 100) + "vw";
+        // coins all drift right toward the Buddies' Billions screen
+        const dx = (Math.random() * 30 + 10) + "vw";
+        const dur = 1400 + Math.random() * 1400;
+        document.body.appendChild(c);
+        c.animate([
+          { transform: "translate(0,0) rotate(0deg)" },
+          { transform: `translate(${dx}, 110vh) rotate(${(Math.random() * 720 - 360) | 0}deg)` },
+        ], { duration: dur, easing: "cubic-bezier(.4,.1,.8,.6)" }).onfinish = () => c.remove();
+        if (i % 5 === 0) sfx.coin();
+      }, i * 45);
+    }
+  }
+
+  // ---------------- COUNTERS ----------------
+  const revEl = document.getElementById("revenue"), wipedEl = document.getElementById("wiped"), pullsEl = document.getElementById("pulls");
+  function updateCounters() {
+    revEl.innerHTML = `<small>TARIFF REVENUE (CLAIMED)</small>${money(state.revenue)}`;
+    wipedEl.innerHTML = `<small>MARKET VALUE WIPED OUT</small>-${money(state.wiped)}`;
+    pullsEl.innerHTML = `<small>LEVER PULLS</small>${state.pulls}`;
+  }
+  document.getElementById("tickerText").textContent = TICKER.join("   ★   ") + "   ★   ";
+
+  // ---------------- CONTROLS ----------------
+  function reset() {
+    if (state.spinning) return;
+    state.pulls = 0; state.revenue = 0; state.wiped = 0;
+    seedSeries(); drawAll(); updateCounters(); initReels();
+    gaugeMode = "idle";
+    SCREENS.forEach(s => { mon[s.key].stamp.classList.remove("show"); mon[s.key].el.classList.remove("alarm", "boom"); });
+    resultEl.textContent = "INSERT AMERICAN SAVINGS · PULL LEVER";
+  }
+  const soundBtn = document.getElementById("soundBtn");
+  function toggleSound() {
+    state.sound = !state.sound;
+    soundBtn.textContent = state.sound ? "🔊 SOUND ON" : "🔇 SOUND OFF";
+  }
+  soundBtn.addEventListener("click", toggleSound);
+  document.getElementById("resetBtn").addEventListener("click", reset);
+  document.querySelectorAll(".btn-red").forEach(b => b.addEventListener("click", () => tone(160, .3, "sawtooth", .12, 0, 80)));
+  window.addEventListener("keydown", e => {
+    if (e.code === "Space") { e.preventDefault(); pull(); }
+    else if (e.key === "r" || e.key === "R") reset();
+    else if (e.key === "m" || e.key === "M") toggleSound();
+  });
+
+  // ---------------- BOOT ----------------
+  seedSeries();
+  updateCounters();
+  layoutBulbs();
+  initReels();
+  drawAll();
+  let rt;
+  window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { layoutBulbs(); drawAll(); reels.forEach(r => placeReel(r, r.index, false)); }, 120); });
+})();
+</script>
+</body>
+</html>
